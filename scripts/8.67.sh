@@ -3,7 +3,7 @@
 set -x
 set -e
 
-[ -f "$LFS/sources/acl-2.3.1-done" ] && exit 0 || echo
+[ -f "$LFS/sources/$(basename $0).done" ] && exit 0 || echo
 
 sudo chown root:root "$LFS/sources"
 sudo chown root:root $LFS/sources/*
@@ -19,21 +19,20 @@ set -x
 set -e
 
 cd /sources
-[ ! -d "acl-2.3.1" ] && tar -xf acl-2.3.1.tar.xz
+[ ! -d "tar-1.34" ] && tar -xf tar-1.34.tar.xz
 
-cd acl-2.3.1
+cd tar-1.34
 
-./configure --prefix=/usr         \
-            --disable-static      \
-            --docdir=/usr/share/doc/acl-2.3.1
+FORCE_UNSAFE_CONFIGURE=1  \
+./configure --prefix=/usr
 
 make
 
-# TODO after Coreutils
-# make check
+make check 2>&1 | tee tar-check-log || [ $(cat tar-check-log | grep FAILED | wc -l) == 1 ]
 
 make install
+make -C doc install-html docdir=/usr/share/doc/tar-1.34
 
 EOT
 
-touch "$LFS/sources/acl-2.3.1-done"
+touch "$LFS/sources/$(basename $0).done"

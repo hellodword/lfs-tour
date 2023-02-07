@@ -3,7 +3,7 @@
 set -x
 set -e
 
-[ -f "$LFS/sources/acl-2.3.1-done" ] && exit 0 || echo
+[ -f "$LFS/sources/$(basename $0).done" ] && exit 0 || echo
 
 sudo chown root:root "$LFS/sources"
 sudo chown root:root $LFS/sources/*
@@ -19,21 +19,12 @@ set -x
 set -e
 
 cd /sources
-[ ! -d "acl-2.3.1" ] && tar -xf acl-2.3.1.tar.xz
+[ ! -d "wheel-0.37.1" ] && tar -xf wheel-0.37.1.tar.gz
 
-cd acl-2.3.1
+cd wheel-0.37.1
 
-./configure --prefix=/usr         \
-            --disable-static      \
-            --docdir=/usr/share/doc/acl-2.3.1
-
-make
-
-# TODO after Coreutils
-# make check
-
-make install
+pip3 install --no-index $PWD
 
 EOT
 
-touch "$LFS/sources/acl-2.3.1-done"
+touch "$LFS/sources/$(basename $0).done"

@@ -3,7 +3,7 @@
 set -x
 set -e
 
-[ -f "$LFS/sources/acl-2.3.1-done" ] && exit 0 || echo
+[ -f "$LFS/sources/$(basename $0).done" ] && exit 0 || echo
 
 sudo chown root:root "$LFS/sources"
 sudo chown root:root $LFS/sources/*
@@ -19,21 +19,16 @@ set -x
 set -e
 
 cd /sources
-[ ! -d "acl-2.3.1" ] && tar -xf acl-2.3.1.tar.xz
+[ ! -d "less-590" ] && tar -xf less-590.tar.gz
 
-cd acl-2.3.1
+cd less-590
 
-./configure --prefix=/usr         \
-            --disable-static      \
-            --docdir=/usr/share/doc/acl-2.3.1
+./configure --prefix=/usr --sysconfdir=/etc
 
 make
-
-# TODO after Coreutils
-# make check
 
 make install
 
 EOT
 
-touch "$LFS/sources/acl-2.3.1-done"
+touch "$LFS/sources/$(basename $0).done"

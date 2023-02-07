@@ -3,7 +3,7 @@
 set -x
 set -e
 
-[ -f "$LFS/sources/acl-2.3.1-done" ] && exit 0 || echo
+[ -f "$LFS/sources/$(basename $0).done" ] && exit 0 || echo
 
 sudo chown root:root "$LFS/sources"
 sudo chown root:root $LFS/sources/*
@@ -19,21 +19,22 @@ set -x
 set -e
 
 cd /sources
-[ ! -d "acl-2.3.1" ] && tar -xf acl-2.3.1.tar.xz
+[ ! -d "sed-4.8" ] && tar -xf sed-4.8.tar.xz
 
-cd acl-2.3.1
+cd sed-4.8
 
-./configure --prefix=/usr         \
-            --disable-static      \
-            --docdir=/usr/share/doc/acl-2.3.1
+./configure --prefix=/usr
 
 make
+make html
 
-# TODO after Coreutils
-# make check
+chown -Rv tester .
+su tester -c "PATH=$PATH make check"
 
 make install
+install -d -m755           /usr/share/doc/sed-4.8
+install -m644 doc/sed.html /usr/share/doc/sed-4.8
 
 EOT
 
-touch "$LFS/sources/acl-2.3.1-done"
+touch "$LFS/sources/$(basename $0).done"

@@ -151,3 +151,107 @@ bash 8.24.sh
 bash 8.25.sh
 
 bash 8.26.sh
+
+bash 8.27.sh
+
+bash 8.28.sh
+
+bash 8.29.sh
+
+bash 8.30.sh
+
+bash 8.31.sh
+
+bash 8.32.sh
+
+bash 8.33.sh
+
+bash 8.34.sh
+
+bash 8.35.sh
+
+bash 8.36.sh
+
+bash 8.37.sh
+
+bash 8.38.sh
+
+bash 8.39.sh
+
+bash 8.40.sh
+
+bash 8.41.sh
+
+bash 8.42.sh
+
+bash 8.43.sh
+
+bash 8.44.sh
+
+bash 8.45.sh
+
+bash 8.46.sh
+
+bash 8.47.sh
+
+bash 8.48.sh
+
+bash 8.49.sh
+
+bash 8.50.sh
+
+bash 8.51.sh
+
+bash 8.52.sh
+
+bash 8.53.sh
+
+bash 8.54.sh
+
+bash 8.55.sh
+
+bash 8.56.sh
+
+bash 8.57.sh
+
+bash 8.58.sh
+
+bash 8.59.sh
+
+bash 8.60.sh
+
+bash 8.61.sh
+
+bash 8.62.sh
+
+bash 8.63.sh
+
+bash 8.64.sh
+
+bash 8.65.sh
+
+bash 8.66.sh
+
+bash 8.67.sh
+
+bash 8.68.sh
+
+bash 8.69.sh
+
+bash 8.70.sh
+
+bash 8.71.sh
+
+bash 8.72.sh
+
+bash 8.73.sh
+
+bash 8.74.sh
+
+bash 8.75.sh
+
+bash 8.76.sh
+
+bash 8.78.sh
+
+bash 8.79.sh

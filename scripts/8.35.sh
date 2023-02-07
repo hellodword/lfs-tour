@@ -3,7 +3,7 @@
 set -x
 set -e
 
-[ -f "$LFS/sources/acl-2.3.1-done" ] && exit 0 || echo
+[ -f "$LFS/sources/$(basename $0).done" ] && exit 0 || echo
 
 sudo chown root:root "$LFS/sources"
 sudo chown root:root $LFS/sources/*
@@ -19,21 +19,21 @@ set -x
 set -e
 
 cd /sources
-[ ! -d "acl-2.3.1" ] && tar -xf acl-2.3.1.tar.xz
+[ ! -d "libtool-2.4.7" ] && tar -xf libtool-2.4.7.tar.xz
 
-cd acl-2.3.1
+cd libtool-2.4.7
 
-./configure --prefix=/usr         \
-            --disable-static      \
-            --docdir=/usr/share/doc/acl-2.3.1
+./configure --prefix=/usr
 
 make
 
-# TODO after Coreutils
-# make check
+# TODO after automake
+# make check TESTSUITEFLAGS=-j7
 
 make install
 
+rm -fv /usr/lib/libltdl.a
+
 EOT
 
-touch "$LFS/sources/acl-2.3.1-done"
+touch "$LFS/sources/$(basename $0).done"

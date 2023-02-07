@@ -1,0 +1,45 @@
+#! /bin/bash
+
+set -x
+set -e
+
+[ -f "$LFS/sources/$(basename $0).done" ] && exit 0 || echo
+
+sudo chown root:root "$LFS/sources"
+sudo chown root:root $LFS/sources/*
+
+sudo chroot "$LFS" /usr/bin/env -i   \
+    HOME=/root                  \
+    TERM="$TERM"                \
+    PS1='(lfs chroot) \u:\w\$ ' \
+    PATH=/usr/bin:/usr/sbin \
+    /bin/bash --login <<"EOT"
+
+set -x
+set -e
+
+cd /sources
+[ ! -d "openssl-3.0.5" ] && tar -xf openssl-3.0.5.tar.gz
+
+cd openssl-3.0.5
+
+./config --prefix=/usr         \
+         --openssldir=/etc/ssl \
+         --libdir=lib          \
+         shared                \
+         zlib-dynamic
+
+make
+
+make test
+
+sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
+make MANSUFFIX=ssl install
+
+mv -v /usr/share/doc/openssl /usr/share/doc/openssl-3.0.5
+
+cp -vfr doc/* /usr/share/doc/openssl-3.0.5
+
+EOT
+
+touch "$LFS/sources/$(basename $0).done"
